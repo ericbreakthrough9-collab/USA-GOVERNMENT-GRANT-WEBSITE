@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Grants.gov Official</title>
+    
+    <!-- Official USWDS Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* ===== OFFICIAL U.S. GOVERNMENT STYLING ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f0f0f0;
+            color: #1b1b1b;
+            line-height: 1.5;
+        }
+
+        .usa-banner {
+            background-color: #f0f0f0;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .banner-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .usa-flag {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(180deg, #b22234 0%, #b22234 50%, #ffffff 50%, #ffffff 100%);
+            border: 1px solid #0a0a0a;
+        }
+
+        .banner-text strong {
+            font-weight: 700;
+        }
+
+        .dot-gov {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .dot-gov span {
+            background: #1b1b1b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .usa-header {
+            background: #112f4e;
+            color: white;
+            border-bottom: 4px solid #b22234;
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .official-seal {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #112f4e;
+            font-size: 24px;
+            border: 2px solid #b22234;
+        }
+
+        .agency-name h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .agency-name .gov-domain {
+            font-size: 12px;
+            color: #ffd700;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nav-menu a:hover {
+            color: #ffd700;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 36px;
+            color: #112f4e;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #5c5c5c;
+            font-size: 18px;
+        }
+
+        .search-box {
+            background: white;
+            border: 2px solid #d9d9d9;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 40px;
+        }
+
+        .search-box i {
+            color: #5c5c5c;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .faq-categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #d9d9d9;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-btn:hover {
+            border-color: #112f4e;
+        }
+
+        .category-btn.active {
+            background: #112f4e;
+            color: white;
+            border-color: #112f4e;
+        }
+
+        .faq-section {
+            background: white;
+            border: 1px solid #d9d9d9;
+            margin-bottom: 30px;
+        }
+
+        .faq-section h3 {
+            font-family: 'Merriweather', serif;
+            padding: 20px;
+            background: #f8f8f8;
+            border-bottom: 2px solid #b22234;
+            color: #112f4e;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #f8f8f8;
+        }
+
+        .faq-question h4 {
+            font-weight: 600;
+            color: #112f4e;
+        }
+
+        .faq-question i {
+            color: #b22234;
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px 20px;
+            color: #5c5c5c;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .still-have-questions {
+            background: #112f4e;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .still-have-questions h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background: #b22234;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background: #8b1a1a;
+        }
+
+        .footer {
+            background: #112f4e;
+            color: white;
+            margin-top: 60px;
+            padding: 30px;
+            text-align: center;
+            border-top: 4px solid #b22234;
+        }
+    </style>
+</head>
+<body>
+    <div class="usa-banner">
+        <div class="banner-content">
+            <div class="usa-flag"></div>
+            <div class="banner-text">
+                <strong>An official website of the United States government</strong>
+            </div>
+            <div class="dot-gov">
+                <i class="fas fa-lock"></i> .gov
+                <span>Official</span>
+            </div>
+        </div>
+    </div>
+
+    <header class="usa-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="official-seal">
+                    <i class="fas fa-eagle"></i>
+                </div>
+                <div class="agency-name">
+                    <h1>Grants.gov</h1>
+                    <span class="gov-domain">U.S. Department of Treasury</span>
+                </div>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="faq.html" style="color: #ffd700;">FAQ</a>
+                <a href="contact.html">Contact</a>
+                <a href="auth.html">Sign In</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Find answers to common questions about federal grants</p>
+        </div>
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="faqSearch" placeholder="Search FAQs...">
+        </div>
+
+        <div class="faq-categories">
+            <button class="category-btn active" onclick="filterFaq('all')">All</button>
+            <button class="category-btn" onclick="filterFaq('application')">Application</button>
+            <button class="category-btn" onclick="filterFaq('payment')">Payment</button>
+            <button class="category-btn" onclick="filterFaq('account')">Bank Account</button>
+            <button class="category-btn" onclick="filterFaq('eligibility')">Eligibility</button>
+        </div>
+
+        <!-- APPLICATION FAQs -->
+        <div class="faq-section" data-category="application">
+            <h3>Application Process</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>How do I apply for a grant?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>To apply for a grant, follow these steps:</p>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>Create an account or sign in to Grants.gov</li>
+                        <li>Browse available grant opportunities</li>
+                        <li>Select a grant that matches your needs</li>
+                        <li>Complete the online application form</li>
+                        <li>Pay the required processing fee</li>
+                        <li>Provide your bank account details for fund deposit</li>
+                        <li>Submit your application</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>How long does the application process take?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>The application form itself takes approximately 10-15 minutes to complete. After submission, applications are typically processed within 24-48 hours. Once approved and payment is received, funds are deposited within 24-48 business hours.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Can I save my application and complete it later?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, you can save your progress and return to complete your application at any time. Simply click "Save for Later" at the bottom of the application form. Your information will be saved in your account.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAYMENT FAQs -->
+        <div class="faq-section" data-category="payment">
+            <h3>Payment & Fees</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Why is there a processing fee?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>The processing fee covers administrative costs including application review, verification, document processing, and customer support. This fee ensures your application is handled promptly and securely. The fee varies by grant amount and is clearly displayed before you apply.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>What payment methods are accepted?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We accept the following payment methods:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Credit/Debit Cards (Visa, MasterCard, American Express, Discover)</li>
+                        <li>PayPal</li>
+                        <li>Bank Transfer (ACH)</li>
+                        <li>Login.gov payments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Is the processing fee refundable?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>The processing fee is non-refundable once your application has been submitted and reviewed. This fee covers the administrative costs already incurred in processing your application.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BANK ACCOUNT FAQs -->
+        <div class="faq-section" data-category="account">
+            <h3>Bank Account & Fund Deposit</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>When will I receive my funds?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Once your application is approved and the processing fee is paid, funds are typically deposited within 24-48 business hours. You will receive a confirmation email when the transfer is initiated.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Is my bank information secure?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, all bank information is encrypted using 256-bit SSL encryption. We are PCI compliant and follow strict federal security guidelines. We only store the last 4 digits of your account number for reference.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Can I change my bank account after applying?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>If you need to update your bank account information before funds are disbursed, please contact our support team immediately at 1-877-696-6775 or through the Contact page.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ELIGIBILITY FAQs -->
+        <div class="faq-section" data-category="eligibility">
+            <h3>Eligibility</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Who can apply for grants?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Eligibility varies by grant program. Generally, the following may apply:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>U.S. citizens and permanent residents</li>
+                        <li>Businesses registered in the United States</li>
+                        <li>Non-profit organizations</li>
+                        <li>Educational institutions</li>
+                        <li>State and local governments</li>
+                        <li>Native American tribal organizations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Do I need a certain credit score to qualify?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Credit score requirements vary by grant type. Some grants do not require a credit check, while others may have minimum requirements. Your credit score will be considered as part of your overall application.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Can I apply for multiple grants?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, you can apply for multiple grants. Each application will be processed separately with its own processing fee. However, approval for one grant does not guarantee approval for others.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="still-have-questions">
+            <h3>Still Have Questions?</h3>
+            <p>Our support team is ready to help you</p>
+            <button class="btn-primary" onclick="window.location.href='contact.html'">Contact Support</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>U.S. Department of Treasury · An official website of the United States government</p>
+        <p style="margin-top: 10px; font-size: 12px;">1-877-696-6775 · support@grants.gov</p>
+    </footer>
+
+    <script>
+        function toggleFaq(element) {
+            const faqItem = element.closest('.faq-item');
+            faqItem.classList.toggle('active');
+        }
+
+        function filterFaq(category) {
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter sections
+            const sections = document.querySelectorAll('.faq-section');
+            if (category === 'all') {
+                sections.forEach(section => {
+                    section.style.display = 'block';
+                });
+            } else {
+                sections.forEach(section => {
+                    if (section.dataset.category === category) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Search functionality
+        document.getElementById('faqSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('h4').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

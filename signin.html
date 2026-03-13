@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grants.gov | Official Sign In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #0B2B4F;
+            --primary-blue: #1E4A7A;
+            --accent-red: #B22234;
+            --accent-gold: #FFD700;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-600: #475569;
+            --gray-900: #0F172A;
+            --success: #10B981;
+            --error: #EF4444;
+        }
+
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+            min-height: 100vh;
+            color: var(--gray-900);
+        }
+
+        /* US Flag Banner */
+        .usa-banner {
+            background: var(--primary-navy);
+            color: var(--white);
+            padding: 12px 0;
+            border-bottom: 3px solid var(--accent-red);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .banner-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .usa-flag {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .usa-flag i {
+            color: var(--accent-gold);
+            font-size: 20px;
+        }
+
+        .usa-flag span {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .gov-tag {
+            background: var(--accent-red);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            padding: 20px 0;
+            margin-top: 60px;
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(145deg, var(--primary-navy), var(--primary-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 24px;
+            border: 2px solid var(--accent-red);
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-navy);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text .domain {
+            font-size: 13px;
+            color: var(--accent-red);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .help-desk {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--gray-600);
+            font-size: 14px;
+        }
+
+        .help-desk i {
+            color: var(--accent-red);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1280px;
+            margin: 48px auto;
+            padding: 0 32px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            min-height: calc(100vh - 300px);
+        }
+
+        /* Left Panel - Information */
+        .info-panel {
+            background: linear-gradient(145deg, var(--primary-navy), var(--primary-blue));
+            border-radius: 32px;
+            padding: 48px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+
+        .info-panel::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .info-panel::after {
+            content: '★★★★★';
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 24px;
+            color: rgba(255,215,0,0.1);
+            letter-spacing: 8px;
+        }
+
+        .catalog-number {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .info-panel h2 {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .info-panel h2 span {
+            color: var(--accent-gold);
+            border-bottom: 3px solid var(--accent-red);
+        }
+
+        .info-panel p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 24px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent-gold);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 8px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 40px 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+        .feature-list li i {
+            width: 28px;
+            height: 28px;
+            background: rgba(255,215,0,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 24px;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .trust-badges span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .trust-badges i {
+            color: var(--accent-gold);
+        }
+
+        /* Right Panel - Forms */
+        .forms-panel {
+            background: var(--white);
+            border-radius: 32px;
+            padding: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+            border: 1px solid var(--gray-200);
+        }
+
+        .forms-header {
+            margin-bottom: 32px;
+        }
+
+        .forms-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+
+        .forms-header p {
+            color: var(--gray-600);
+            font-size: 15px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            background: var(--gray-100);
+            padding: 6px;
+            border-radius: 60px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            background: transparent;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--white);
+            color: var(--primary-navy);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* Forms */
+        .form-panel {
+            display: none;
+        }
+
+        .form-panel.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--gray-900);
+            font-size: 14px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            color: var(--gray-300);
+            font-size: 18px;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+            padding: 16px 16px 16px 48px;
+            border: 2px solid var(--gray-200);
+            border-radius: 16px;
+            font-size: 15px;
+            transition: all 0.2s;
+            background: var(--white);
+        }
+
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(30,74,122,0.1);
+        }
+
+        .input-wrapper input.error {
+            border-color: var(--error);
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            flex: 1;
+            background: var(--gray-200);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .strength-bar.active:nth-child(1) { background: var(--error); }
+        .strength-bar.active:nth-child(2) { background: #F59E0B; }
+        .strength-bar.active:nth-child(3) { background: var(--success); }
+
+        .strength-text {
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-top: 4px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary-blue);
+        }
+
+        .checkbox-group label {
+            color: var(--gray-600);
+            font-size: 14px;
+        }
+
+        .checkbox-group a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-link {
+            text-align: right;
+            margin: 8px 0 24px;
+        }
+
+        .forgot-link a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary-navy);
+            color: var(--white);
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(11,43,79,0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 16px;
+            background: var(--white);
+            color: var(--gray-600);
+            border: 2px solid var(--gray-200);
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        /* Social Login */
+        .divider {
+            text-align: center;
+            margin: 32px 0 24px;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
+        .divider span {
+            background: var(--white);
+            padding: 0 16px;
+            color: var(--gray-600);
+            font-size: 14px;
+        }
+
+        .social-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .social-btn {
+            padding: 14px;
+            border: 2px solid var(--gray-200);
+            border-radius: 16px;
+            background: var(--white);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--gray-700);
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary-blue);
+            background: var(--gray-50);
+        }
+
+        .social-btn.login-gov {
+            color: var(--primary-navy);
+        }
+
+        .social-btn.idme {
+            color: #2E7D32;
+        }
+
+        /* Messages */
+        .message {
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .message.error {
+            background: #FEF2F2;
+            color: var(--error);
+            border: 1px solid #FECACA;
+            display: flex;
+        }
+
+        .message.success {
+            background: #F0FDF4;
+            color: var(--success);
+            border: 1px solid #BBF7D0;
+            display: flex;
+        }
+
+        .message i {
+            font-size: 18px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--white);
+            padding: 40px 0;
+            border-top: 1px solid var(--gray-200);
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-copyright {
+            color: var(--gray-600);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .info-panel {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            .forms-panel {
+                padding: 32px 24px;
+            }
+            .social-buttons {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- US Banner -->
+    <div class="usa-banner">
+        <div class="banner-content">
+            <div class="usa-flag">
+                <i class="fas fa-flag-usa"></i>
+                <span>An official website of the United States government</span>
+            </div>
+            <div class="gov-tag">.GOV</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-capitol"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Grants.gov</h1>
+                    <span class="domain">OFFICIAL GOVERNMENT PORTAL</span>
+                </div>
+            </div>
+            <div class="help-desk">
+                <i class="fas fa-phone-alt"></i>
+                <span>24/7 Assistance: 1-877-696-6775</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Left Panel - Information -->
+        <div class="info-panel">
+            <div class="catalog-number">
+                <i class="fas fa-database" style="margin-right: 8px;"></i>
+                CFDA #84.XXX | Federal Assistance Listing
+            </div>
+            
+            <h2>
+                Federal Grant<br>
+                <span>Opportunity Portal</span>
+            </h2>
+            
+            <p>
+                Access over $500 billion in federal grant funding from 26 federal agencies. 
+                Streamlined application process with real-time tracking.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1,200+</div>
+                    <div class="stat-label">Active Grants</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">26</div>
+                    <div class="stat-label">Agencies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$500B</div>
+                    <div class="stat-label">Total Funding</div>
+                </div>
+            </div>
+
+            <ul class="feature-list">
+                <li>
+                    <i class="fas fa-check"></i>
+                    <span>Search and apply for federal grants</span>
+                </li>
+                <li>
+                    <i class="fas fa-check"></i>
+                    <span>Track application status in real-time</span>
+                </li>
+                <li>
+                    <i class="fas fa-check"></i>
+                    <span>Receive personalized grant recommendations</span>
+                </li>
+                <li>
+                    <i class="fas fa-check"></i>
+                    <span>Access training and resources</span>
+                </li>
+                <li>
+                    <i class="fas fa-check"></i>
+                    <span>Free official government service</span>
+                </li>
+            </ul>
+
+            <div class="trust-badges">
+                <span>
+                    <i class="fas fa-lock"></i>
+                    Secure .gov
+                </span>
+                <span>
+                    <i class="fas fa-shield-alt"></i>
+                    HTTPS Encryption
+                </span>
+                <span>
+                    <i class="fas fa-universal-access"></i>
+                    Section 508 Compliant
+                </span>
+            </div>
+        </div>
+
+        <!-- Right Panel - Forms -->
+        <div class="forms-panel">
+            <div class="forms-header">
+                <h3>Applicant Portal</h3>
+                <p>Sign in to your account or register as a new applicant</p>
+            </div>
+
+            <!-- Messages -->
+            <div id="errorMessage" class="message error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText"></span>
+            </div>
+            <div id="successMessage" class="message success">
+                <i class="fas fa-check-circle"></i>
+                <span id="successText"></span>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" id="signinTab">Sign In</button>
+                <button class="tab-btn" id="signupTab">Create Account</button>
+            </div>
+
+            <!-- Sign In Form -->
+            <div id="signinPanel" class="form-panel active">
+                <form id="signinForm">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="signinEmail" placeholder="applicant@agency.gov" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signinPassword" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember this device</label>
+                    </div>
+
+                    <div class="forgot-link">
+                        <a href="#" onclick="showMessage('Password reset instructions sent to your email', 'success')">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="signinBtn">
+                        <span>Sign In to Portal</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>Government login options</span>
+                </div>
+
+                <div class="social-buttons">
+                    <button class="social-btn login-gov" onclick="showMessage('Redirecting to Login.gov...', 'success')">
+                        <i class="fas fa-shield-alt"></i>
+                        Login.gov
+                    </button>
+                    <button class="social-btn idme" onclick="showMessage('Redirecting to ID.me...', 'success')">
+                        <i class="fas fa-id-card"></i>
+                        ID.me
+                    </button>
+                    <button class="social-btn" onclick="showMessage('Connecting to USA.gov...', 'success')">
+                        <i class="fas fa-flag-usa"></i>
+                        USA.gov
+                    </button>
+                </div>
+
+                <button class="btn-secondary" onclick="switchTab('signup')">
+                    New applicant? Create an account
+                </button>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div id="signupPanel" class="form-panel">
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label>Full Legal Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="signupName" placeholder="John Smith" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="signupEmail" placeholder="applicant@agency.gov" required>
+                        </div>
+                        <small style="color: var(--gray-600);">Use your .gov, .mil, or .edu email if applicable</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Organization Type</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-building"></i>
+                            <select id="orgType">
+                                <option value="">Select organization type</option>
+                                <option value="business">Business/For-Profit</option>
+                                <option value="nonprofit">Nonprofit Organization</option>
+                                <option value="education">Educational Institution</option>
+                                <option value="government">Government Agency</option>
+                                <option value="individual">Individual</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signupPassword" placeholder="Create a password" required>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar" id="strength1"></div>
+                            <div class="strength-bar" id="strength2"></div>
+                            <div class="strength-bar" id="strength3"></div>
+                        </div>
+                        <div class="strength-text" id="strengthText">
+                            Use 8+ characters with letters, numbers & symbols
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signupConfirm" placeholder="Confirm your password" required>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">
+                            I agree to the <a href="#">Terms of Service</a> and 
+                            <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="updates">
+                        <label for="updates">Receive grant opportunity alerts and updates</label>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="signupBtn">
+                        <span>Create Account</span>
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>Or register with</span>
+                </div>
+
+                <div class="social-buttons">
+                    <button class="social-btn login-gov" onclick="showMessage('Redirecting to Login.gov...', 'success')">
+                        <i class="fas fa-shield-alt"></i>
+                        Login.gov
+                    </button>
+                    <button class="social-btn idme" onclick="showMessage('Redirecting to ID.me...', 'success')">
+                        <i class="fas fa-id-card"></i>
+                        ID.me
+                    </button>
+                </div>
+
+                <button class="btn-secondary" onclick="switchTab('signin')">
+                    Already have an account? Sign in
+                </button>
+            </div>
+
+            <p style="text-align: center; margin-top: 32px; font-size: 13px; color: var(--gray-600);">
+                <i class="fas fa-shield-alt" style="margin-right: 6px;"></i>
+                This is a U.S. government system. Unauthorized access is prohibited.
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">About Grants.gov</a>
+                <a href="#">Accessibility</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">FOIA</a>
+                <a href="#">No FEAR Act</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="footer-copyright">
+                <i class="fas fa-flag-usa" style="margin-right: 8px; color: var(--accent-red);"></i>
+                U.S. Department of Health and Human Services
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Switching
+        function switchTab(tab) {
+            const signinPanel = document.getElementById('signinPanel');
+            const signupPanel = document.getElementById('signupPanel');
+            const signinTab = document.getElementById('signinTab');
+            const signupTab = document.getElementById('signupTab');
+            
+            if (tab === 'signin') {
+                signinPanel.classList.add('active');
+                signupPanel.classList.remove('active');
+                signinTab.classList.add('active');
+                signupTab.classList.remove('active');
+            } else {
+                signupPanel.classList.add('active');
+                signinPanel.classList.remove('active');
+                signupTab.classList.add('active');
+                signinTab.classList.remove('active');
+            }
+            
+            hideMessages();
+        }
+
+        // Message Handling
+        function showMessage(message, type) {
+            const errorMsg = document.getElementById('errorMessage');
+            const successMsg = document.getElementById('successMessage');
+            const errorText = document.getElementById('errorText');
+            const successText = document.getElementById('successText');
+            
+            if (type === 'error') {
+                errorText.textContent = message;
+                errorMsg.style.display = 'flex';
+                successMsg.style.display = 'none';
+            } else {
+                successText.textContent = message;
+                successMsg.style.display = 'flex';
+                errorMsg.style.display = 'none';
+            }
+            
+            setTimeout(hideMessages, 5000);
+        }
+
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Password Strength
+        const passwordInput = document.getElementById('signupPassword');
+        if (passwordInput) {
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const strength1 = document.getElementById('strength1');
+                const strength2 = document.getElementById('strength2');
+                const strength3 = document.getElementById('strength3');
+                const strengthText = document.getElementById('strengthText');
+                
+                // Reset
+                [strength1, strength2, strength3].forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                if (!password) {
+                    strengthText.textContent = 'Use 8+ characters with letters, numbers & symbols';
+                    return;
+                }
+                
+                let score = 0;
+                if (password.length >= 8) score++;
+                if (password.length >= 12) score++;
+                if (/[a-z]/.test(password)) score++;
+                if (/[A-Z]/.test(password)) score++;
+                if (/[0-9]/.test(password)) score++;
+                if (/[^a-zA-Z0-9]/.test(password)) score++;
+                
+                if (score <= 3) {
+                    strength1.classList.add('active');
+                    strengthText.textContent = 'Weak password';
+                } else if (score <= 5) {
+                    strength1.classList.add('active');
+                    strength2.classList.add('active');
+                    strengthText.textContent = 'Medium password';
+                } else {
+                    strength1.classList.add('active');
+                    strength2.classList.add('active');
+                    strength3.classList.add('active');
+                    strengthText.textContent = 'Strong password';
+                }
+            });
+        }
+
+        // Sign In Handler
+        document.getElementById('signinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('signinEmail').value;
+            const password = document.getElementById('signinPassword').value;
+            const btn = document.getElementById('signinBtn');
+            
+            if (!email || !password) {
+                showMessage('Please enter both email and password', 'error');
+                return;
+            }
+            
+            if (!email.includes('@') || !email.includes('.')) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            // Show loading
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span>Sign In to Portal</span><i class="fas fa-arrow-right"></i>';
+                btn.disabled = false;
+                
+                localStorage.setItem('grantsLoggedIn', 'true');
+                localStorage.setItem('grantsEmail', email);
+                
+                showMessage('Authentication successful. Redirecting to dashboard...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            }, 1500);
+        });
+
+        // Sign Up Handler
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+            const terms = document.getElementById('terms').checked;
+            const btn = document.getElementById('signupBtn');
+            
+            if (!name || !email || !password || !confirm) {
+                showMessage('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            if (!email.includes('@') || !email.includes('.')) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showMessage('Password must be at least 8 characters', 'error');
+                return;
+            }
+            
+            if (password !== confirm) {
+                showMessage('Passwords do not match', 'error');
+                return;
+            }
+            
+            if (!terms) {
+                showMessage('You must agree to the Terms of Service', 'error');
+                return;
+            }
+            
+            // Show loading
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span>Create Account</span><i class="fas fa-user-plus"></i>';
+                btn.disabled = false;
+                
+                localStorage.setItem('grantsLoggedIn', 'true');
+                localStorage.setItem('grantsName', name);
+                localStorage.setItem('grantsEmail', email);
+                
+                showMessage('Account created successfully! Please check your email to verify.', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'verify-email.html';
+                }, 2000);
+            }, 1500);
+        });
+
+        // Check for existing session
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('grantsLoggedIn') === 'true') {
+                // Optional: auto-redirect
+                // window.location.href = 'dashboard.html';
+            }
+        });
+
+        // Tab click handlers
+        document.getElementById('signinTab').addEventListener('click', function() {
+            switchTab('signin');
+        });
+
+        document.getElementById('signupTab').addEventListener('click', function() {
+            switchTab('signup');
+        });
+    </script>
+</body>
+</html>

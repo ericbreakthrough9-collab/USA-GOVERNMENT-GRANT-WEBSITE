@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Grants.gov Official</title>
+    
+    <!-- Official USWDS Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* ===== OFFICIAL U.S. GOVERNMENT STYLING ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f0f0f0;
+            color: #1b1b1b;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* === USA Flag Banner === */
+        .usa-banner {
+            background-color: #f0f0f0;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .banner-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .usa-flag {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(180deg, #b22234 0%, #b22234 50%, #ffffff 50%, #ffffff 100%);
+            border: 1px solid #0a0a0a;
+        }
+
+        .banner-text {
+            color: #1b1b1b;
+        }
+
+        .banner-text strong {
+            font-weight: 700;
+        }
+
+        .dot-gov {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .dot-gov span {
+            background: #1b1b1b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* === Header === */
+        .usa-header {
+            background: #112f4e;
+            color: white;
+            border-bottom: 4px solid #b22234;
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .official-seal {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #112f4e;
+            font-size: 24px;
+            border: 2px solid #b22234;
+        }
+
+        .agency-name h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .agency-name .gov-domain {
+            font-size: 12px;
+            color: #ffd700;
+            display: block;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .phone-number {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .phone-number i {
+            color: #ffd700;
+        }
+
+        /* === Main Container === */
+        .main-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* === Auth Card === */
+        .auth-card {
+            background: white;
+            border: 1px solid #d9d9d9;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* === Left Panel - Info === */
+        .info-panel {
+            background: #112f4e;
+            color: white;
+            padding: 40px;
+        }
+
+        .info-panel h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .info-panel h2 span {
+            color: #ffd700;
+            border-bottom: 2px solid #b22234;
+        }
+
+        .info-panel p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .auth-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .auth-features li {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .auth-features li i {
+            color: #ffd700;
+            font-size: 18px;
+        }
+
+        .trust-badge {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            gap: 20px;
+        }
+
+        .trust-badge span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        /* === Right Panel - Forms === */
+        .form-panel {
+            padding: 40px;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+        }
+
+        .form-header h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 24px;
+            color: #112f4e;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: #5c5c5c;
+            font-size: 15px;
+        }
+
+        /* === Tabs === */
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e5e5e5;
+            padding-bottom: 15px;
+        }
+
+        .auth-tab {
+            padding: 8px 20px;
+            background: none;
+            border: none;
+            font-weight: 600;
+            font-size: 16px;
+            color: #5c5c5c;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .auth-tab.active {
+            color: #112f4e;
+        }
+
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #b22234;
+        }
+
+        /* === Forms === */
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1b1b1b;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #d9d9d9;
+            font-size: 16px;
+            font-family: 'Source Sans Pro', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #112f4e;
+            outline: none;
+        }
+
+        .form-group input.error {
+            border-color: #b22234;
+            background: #fff5f5;
+        }
+
+        .input-hint {
+            font-size: 13px;
+            color: #5c5c5c;
+            margin-top: 5px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .forgot-link {
+            text-align: right;
+            margin: 10px 0 20px;
+        }
+
+        .forgot-link a {
+            color: #112f4e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* === Buttons === */
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: #b22234;
+            color: white;
+            border: none;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #8b1a1a;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: #112f4e;
+            border: 2px solid #112f4e;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn-outline:hover {
+            background: #112f4e;
+            color: white;
+        }
+
+        /* === Social Login === */
+        .divider {
+            text-align: center;
+            margin: 30px 0 20px;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #e5e5e5;
+        }
+
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            color: #5c5c5c;
+            font-size: 14px;
+        }
+
+        .social-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .social-btn {
+            padding: 12px;
+            border: 2px solid #e5e5e5;
+            background: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .social-btn:hover {
+            border-color: #112f4e;
+        }
+
+        .social-btn.login-gov {
+            color: #112f4e;
+        }
+
+        .social-btn.idme {
+            color: #2b6e4e;
+        }
+
+        /* === Messages === */
+        .message {
+            padding: 15px;
+            margin-bottom: 25px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .message.error {
+            background: #fef2f2;
+            border-left: 4px solid #b22234;
+            color: #b22234;
+        }
+
+        .message.success {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            color: #10b981;
+        }
+
+        .message i {
+            font-size: 18px;
+        }
+
+        /* === Password Strength === */
+        .password-strength {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            flex: 1;
+            background: #e5e5e5;
+            transition: all 0.2s;
+        }
+
+        .strength-bar.active:nth-child(1) { background: #b22234; }
+        .strength-bar.active:nth-child(2) { background: #ffd700; }
+        .strength-bar.active:nth-child(3) { background: #10b981; }
+
+        .strength-text {
+            font-size: 12px;
+            color: #5c5c5c;
+            margin-top: 4px;
+        }
+
+        /* === Footer === */
+        .usa-footer {
+            background: #112f4e;
+            color: white;
+            margin-top: 60px;
+            border-top: 4px solid #b22234;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 900px) {
+            .auth-card {
+                grid-template-columns: 1fr;
+            }
+            .info-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- USA BANNER -->
+    <div class="usa-banner">
+        <div class="banner-content">
+            <div class="usa-flag"></div>
+            <div class="banner-text">
+                <strong>An official website of the United States government</strong>
+            </div>
+            <div class="dot-gov">
+                <i class="fas fa-lock"></i> .gov
+                <span>Official</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="usa-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="official-seal">
+                    <i class="fas fa-eagle"></i>
+                </div>
+                <div class="agency-name">
+                    <h1>Grants.gov</h1>
+                    <span class="gov-domain">U.S. Department of Treasury</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="phone-number">
+                    <i class="fas fa-phone-alt"></i>
+                    1-877-696-6775
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container">
+        <div class="auth-card">
+            <!-- LEFT PANEL - INFORMATION -->
+            <div class="info-panel">
+                <h2>Federal Grant <span>Applicant Portal</span></h2>
+                <p>Secure access to apply for and manage federal grant opportunities.</p>
+
+                <ul class="auth-features">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Login.gov verified authentication</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Track application status in real-time</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Secure document upload and storage</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Multi-factor authentication enabled</span>
+                    </li>
+                </ul>
+
+                <div class="trust-badge">
+                    <span><i class="fas fa-lock"></i> FIPS 140-2</span>
+                    <span><i class="fas fa-shield-alt"></i> FedRAMP</span>
+                    <span><i class="fas fa-check"></i> Section 508</span>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL - FORMS -->
+            <div class="form-panel">
+                <div class="form-header">
+                    <h3>Applicant Sign In</h3>
+                    <p>Access your Grants.gov account</p>
+                </div>
+
+                <!-- MESSAGES -->
+                <div id="errorMessage" class="message error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorText"></span>
+                </div>
+                <div id="successMessage" class="message success">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="successText"></span>
+                </div>
+
+                <!-- TABS -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="signinTab">Sign In</button>
+                    <button class="auth-tab" id="signupTab">Create Account</button>
+                </div>
+
+                <!-- SIGN IN FORM -->
+                <div id="signinForm" class="auth-form active">
+                    <form id="signinFormElement">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="signinEmail" placeholder="name@agency.gov" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="signinPassword" placeholder="Enter your password" required>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="rememberDevice">
+                            <label for="rememberDevice">Remember this device</label>
+                        </div>
+
+                        <div class="forgot-link">
+                            <a href="#" onclick="showMessage('Password reset instructions have been sent to your email.', 'success'); return false;">
+                                Forgot password?
+                            </a>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="signinBtn">
+                            Sign In to Portal
+                        </button>
+                    </form>
+
+                    <div class="divider">
+                        <span>Government login options</span>
+                    </div>
+
+                    <div class="social-buttons">
+                        <button class="social-btn login-gov" onclick="showMessage('Redirecting to Login.gov...', 'success')">
+                            <i class="fas fa-shield-alt"></i> Login.gov
+                        </button>
+                        <button class="social-btn idme" onclick="showMessage('Redirecting to ID.me...', 'success')">
+                            <i class="fas fa-id-card"></i> ID.me
+                        </button>
+                        <button class="social-btn" onclick="showMessage('Redirecting to USA.gov...', 'success')">
+                            <i class="fas fa-flag-usa"></i> USA.gov
+                        </button>
+                    </div>
+
+                    <button class="btn-outline" onclick="switchTab('signup')">
+                        New applicant? Create an account
+                    </button>
+                </div>
+
+                <!-- SIGN UP FORM -->
+                <div id="signupForm" class="auth-form">
+                    <form id="signupFormElement">
+                        <div class="form-group">
+                            <label>Full Legal Name</label>
+                            <input type="text" id="signupName" placeholder="John Smith" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="signupEmail" placeholder="name@agency.gov" required>
+                            <div class="input-hint">Use your .gov, .mil, or .edu email if applicable</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Organization Type</label>
+                            <select id="orgType" style="width: 100%; padding: 14px; border: 2px solid #d9d9d9;">
+                                <option value="">Select organization type</option>
+                                <option value="business">Business/For-Profit</option>
+                                <option value="nonprofit">Nonprofit Organization</option>
+                                <option value="education">Educational Institution</option>
+                                <option value="government">Government Agency</option>
+                                <option value="individual">Individual</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="signupPassword" placeholder="Create a password" required>
+                            <div class="password-strength">
+                                <div class="strength-bar" id="strength1"></div>
+                                <div class="strength-bar" id="strength2"></div>
+                                <div class="strength-bar" id="strength3"></div>
+                            </div>
+                            <div class="strength-text" id="strengthText">
+                                Must be at least 8 characters with letters and numbers
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" id="signupConfirm" placeholder="Confirm password" required>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="signupBtn">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <div class="divider">
+                        <span>Or register with</span>
+                    </div>
+
+                    <div class="social-buttons">
+                        <button class="social-btn login-gov" onclick="showMessage('Redirecting to Login.gov...', 'success')">
+                            <i class="fas fa-shield-alt"></i> Login.gov
+                        </button>
+                        <button class="social-btn idme" onclick="showMessage('Redirecting to ID.me...', 'success')">
+                            <i class="fas fa-id-card"></i> ID.me
+                        </button>
+                    </div>
+
+                    <button class="btn-outline" onclick="switchTab('signin')">
+                        Already have an account? Sign in
+                    </button>
+                </div>
+
+                <p style="text-align: center; margin-top: 25px; font-size: 13px; color: #5c5c5c;">
+                    <i class="fas fa-shield-alt"></i> Protected by Federal Information Security Modernization Act
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="usa-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Accessibility</a>
+                <a href="#">FOIA</a>
+                <a href="#">No FEAR Act</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div>
+                <i class="fas fa-flag-usa" style="color: #b22234; margin-right: 8px;"></i>
+                U.S. Department of Treasury · An official website of the United States government
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== TAB SWITCHING =====
+        function switchTab(tab) {
+            const signinForm = document.getElementById('signinForm');
+            const signupForm = document.getElementById('signupForm');
+            const signinTab = document.getElementById('signinTab');
+            const signupTab = document.getElementById('signupTab');
+            
+            if (tab === 'signin') {
+                signinForm.classList.add('active');
+                signupForm.classList.remove('active');
+                signinTab.classList.add('active');
+                signupTab.classList.remove('active');
+            } else {
+                signupForm.classList.add('active');
+                signinForm.classList.remove('active');
+                signupTab.classList.add('active');
+                signinTab.classList.remove('active');
+            }
+            hideMessages();
+        }
+
+        // ===== MESSAGE HANDLING =====
+        function showMessage(message, type) {
+            const errorMsg = document.getElementById('errorMessage');
+            const successMsg = document.getElementById('successMessage');
+            const errorText = document.getElementById('errorText');
+            const successText = document.getElementById('successText');
+            
+            if (type === 'error') {
+                errorText.textContent = message;
+                errorMsg.style.display = 'flex';
+                successMsg.style.display = 'none';
+            } else {
+                successText.textContent = message;
+                successMsg.style.display = 'flex';
+                errorMsg.style.display = 'none';
+            }
+            
+            setTimeout(hideMessages, 4000);
+        }
+
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // ===== PASSWORD STRENGTH =====
+        document.getElementById('signupPassword')?.addEventListener('input', function() {
+            const password = this.value;
+            const strength1 = document.getElementById('strength1');
+            const strength2 = document.getElementById('strength2');
+            const strength3 = document.getElementById('strength3');
+            const strengthText = document.getElementById('strengthText');
+            
+            [strength1, strength2, strength3].forEach(el => el.classList.remove('active'));
+            
+            if (!password) {
+                strengthText.textContent = 'Must be at least 8 characters with letters and numbers';
+                return;
+            }
+            
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^a-zA-Z0-9]/.test(password)) score++;
+            
+            if (score <= 2) {
+                strength1.classList.add('active');
+                strengthText.textContent = 'Weak password';
+            } else if (score <= 3) {
+                strength1.classList.add('active');
+                strength2.classList.add('active');
+                strengthText.textContent = 'Medium password';
+            } else {
+                strength1.classList.add('active');
+                strength2.classList.add('active');
+                strength3.classList.add('active');
+                strengthText.textContent = 'Strong password';
+            }
+        });
+
+        // ===== SIGN IN HANDLER =====
+        document.getElementById('signinFormElement')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('signinEmail').value;
+            const password = document.getElementById('signinPassword').value;
+            const btn = document.getElementById('signinBtn');
+            
+            if (!email || !password) {
+                showMessage('Please enter both email and password', 'error');
+                return;
+            }
+            
+            if (!email.includes('@') || !email.includes('.')) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                const userName = email.split('@')[0];
+                localStorage.setItem('grantsLoggedIn', 'true');
+                localStorage.setItem('grantsName', userName);
+                localStorage.setItem('grantsEmail', email);
+                
+                btn.innerHTML = 'Sign In to Portal';
+                btn.disabled = false;
+                
+                showMessage('Authentication successful. Redirecting...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            }, 1500);
+        });
+
+        // ===== SIGN UP HANDLER =====
+        document.getElementById('signupFormElement')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+            const terms = document.getElementById('terms').checked;
+            const btn = document.getElementById('signupBtn');
+            
+            if (!name || !email || !password || !confirm) {
+                showMessage('Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (!email.includes('@') || !email.includes('.')) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showMessage('Password must be at least 8 characters', 'error');
+                return;
+            }
+            
+            if (password !== confirm) {
+                showMessage('Passwords do not match', 'error');
+                return;
+            }
+            
+            if (!terms) {
+                showMessage('You must agree to the Terms of Service', 'error');
+                return;
+            }
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                localStorage.setItem('grantsLoggedIn', 'true');
+                localStorage.setItem('grantsName', name);
+                localStorage.setItem('grantsEmail', email);
+                localStorage.setItem('grantsOrgType', document.getElementById('orgType').value);
+                
+                btn.innerHTML = 'Create Account';
+                btn.disabled = false;
+                
+                showMessage('Account created successfully! Redirecting...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            }, 1500);
+        });
+
+        // ===== TAB CLICK HANDLERS =====
+        document.getElementById('signinTab').addEventListener('click', () => switchTab('signin'));
+        document.getElementById('signupTab').addEventListener('click', () => switchTab('signup'));
+    </script>
+</body>
+</html>
