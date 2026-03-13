@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Grants.gov Official</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: #f0f0f0;
+        }
+
+        .usa-banner {
+            background-color: #f0f0f0;
+            padding: 8px 0;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .banner-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .usa-flag {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(180deg, #b22234 0%, #b22234 50%, #ffffff 50%, #ffffff 100%);
+            border: 1px solid #0a0a0a;
+        }
+
+        .dot-gov span {
+            background: #1b1b1b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .admin-header {
+            background: #112f4e;
+            color: white;
+            border-bottom: 4px solid #b22234;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-title h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 24px;
+        }
+
+        .admin-title span {
+            color: #ffd700;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .admin-stats {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-left: 4px solid #b22234;
+        }
+
+        .stat-card .number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #112f4e;
+        }
+
+        .stat-card .label {
+            color: #5c5c5c;
+        }
+
+        .applications-section {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            background: white;
+            border: 1px solid #d9d9d9;
+        }
+
+        .section-header {
+            padding: 20px;
+            border-bottom: 1px solid #e5e5e5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            font-family: 'Merriweather', serif;
+            color: #112f4e;
+        }
+
+        .filter-select {
+            padding: 8px;
+            border: 2px solid #d9d9d9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px;
+            background: #f8f8f8;
+            color: #112f4e;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-approved {
+            background: #f0fdf4;
+            color: #10b981;
+            border: 1px solid #10b981;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #d97706;
+            border: 1px solid #d97706;
+        }
+
+        .status-review {
+            background: #e0f2fe;
+            color: #0284c7;
+            border: 1px solid #0284c7;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            background: #112f4e;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .action-btn:hover {
+            background: #b22234;
+        }
+    </style>
+</head>
+<body>
+    <div class="usa-banner">
+        <div class="banner-content">
+            <div class="usa-flag"></div>
+            <div class="banner-text">
+                <strong>Administrative Access Only</strong>
+            </div>
+            <div class="dot-gov">
+                <span>RESTRICTED</span>
+            </div>
+        </div>
+    </div>
+
+    <header class="admin-header">
+        <div class="header-content">
+            <div class="admin-title">
+                <h1>Grants.gov Admin Portal <span>U.S. Department of Treasury</span></h1>
+            </div>
+            <div>
+                <span style="margin-right: 20px;"><i class="fas fa-user-shield"></i> Admin</span>
+                <button onclick="logout()" style="background: transparent; border: 1px solid white; color: white; padding: 5px 15px; cursor: pointer;">Sign Out</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-stats">
+        <div class="stat-card">
+            <div class="number">156</div>
+            <div class="label">Total Applications</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$4.2M</div>
+            <div class="label">Total Approved</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">23</div>
+            <div class="label">Pending Review</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">12</div>
+            <div class="label">New Today</div>
+        </div>
+    </div>
+
+    <div class="applications-section">
+        <div class="section-header">
+            <h2>Recent Applications</h2>
+            <select class="filter-select">
+                <option>All Status</option>
+                <option>Pending</option>
+                <option>Approved</option>
+                <option>Under Review</option>
+            </select>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Application ID</th>
+                    <th>Applicant</th>
+                    <th>Grant Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GR-2024-001</td>
+                    <td>John Smith</td>
+                    <td>Small Business</td>
+                    <td>$50,000</td>
+                    <td>03/15/2024</td>
+                    <td><span class="status-badge status-approved">Approved</span></td>
+                    <td>
+                        <button class="action-btn">View</button>
+                        <button class="action-btn">Process</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GR-2024-002</td>
+                    <td>Sarah Johnson</td>
+                    <td>Education</td>
+                    <td>$100,000</td>
+                    <td>03/14/2024</td>
+                    <td><span class="status-badge status-pending">Pending</span></td>
+                    <td>
+                        <button class="action-btn">View</button>
+                        <button class="action-btn">Process</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GR-2024-003</td>
+                    <td>Robert Davis</td>
+                    <td>Research</td>
+                    <td>$250,000</td>
+                    <td>03/13/2024</td>
+                    <td><span class="status-badge status-review">Under Review</span></td>
+                    <td>
+                        <button class="action-btn">View</button>
+                        <button class="action-btn">Process</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GR-2024-004</td>
+                    <td>Maria Garcia</td>
+                    <td>Housing</td>
+                    <td>$75,000</td>
+                    <td>03/12/2024</td>
+                    <td><span class="status-badge status-approved">Approved</span></td>
+                    <td>
+                        <button class="action-btn">View</button>
+                        <button class="action-btn">Process</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div style="padding: 20px; text-align: center;">
+            <button style="background: #112f4e; color: white; border: none; padding: 10px 30px; cursor: pointer;">Load More</button>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            window.location.href = 'auth.html';
+        }
+    </script>
+</body>
+</html>
